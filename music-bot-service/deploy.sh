@@ -1,0 +1,1 @@
+docker-compose -p "discord-bot" up -d --build

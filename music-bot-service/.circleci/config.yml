@@ -1,0 +1,55 @@
+version: 2.1
+
+jobs:
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: IMAGE
+      DOCKER_TAG: lastest  
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USER
+          docker-password: DOCKER_PASSWORD
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG  
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+  job-lam-deo-gi:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run:
+            name: "Test Connection"
+            command: "echo Connected1!"
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - $SSH_KEY_FINGERPRINT
+      - run:
+          name: ReDeploy
+          command: ssh -oStrictHostKeyChecking=no root@144.91.104.7 "cd $PROJECT_PATH && sh -x deploy.sh"
+workflows:
+  commit:
+    jobs:
+      - job-lam-deo-gi:
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
