@@ -18,12 +18,12 @@
   "msgs": [
     {
       "id": "template0",
-      "des": "Test message",
+      "des": "Test message 1",
       "msg": "Discord api is working!"
     },
     {
       "id": "template1",
-      "des": "Test message",
+      "des": "Test message 2",
       "msg": "Everyday message sent at ${TIME}, code today is ${RANDOM}"
     },
     {

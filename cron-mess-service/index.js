@@ -4,7 +4,7 @@ const cron = require('node-cron');
 
 const lib = require('./util.js');
 const service = require('./auto-mess.js');
-const { cron_setting } = require('./config.json');
+const { cron_setting, channels, msgs } = require('./config.json');
 
 const bot = new Eris(process.env.TOKEN1, {
   intents: [
@@ -23,9 +23,12 @@ bot.on('ready', () => {
 bot.connect();
 
 // ========================================================
+// Cron schedule instanely
+// service.messageService([channels[1], channels[0]], msgs[1], bot);
+
 // Cron schedule everyday default
 // cron.schedule(`${cron_setting.minute} ${cron_setting.hour} * * *`, () => {
-//   service.messageService(bot);
+//   service.messageService([], msgs[1], bot);
 // }, {
 //   scheduled: true,
 //   timezone: cron_setting.zone
@@ -33,7 +36,7 @@ bot.connect();
 
 // Cron schedule everyday 7h30 - 7h50 AM
 cron.schedule(`${lib.randomBetween(30, 50)} 7 * * *`, () => {
-  service.messageService(bot);
+  service.messageService([channels[1], channels[0]], msgs[1], bot);
 }, {
   scheduled: true,
   timezone: cron_setting.zone
@@ -41,7 +44,7 @@ cron.schedule(`${lib.randomBetween(30, 50)} 7 * * *`, () => {
 
 // Cron schedule everyday 17h10 - 17h59 PM
 cron.schedule(`${lib.randomBetween(10, 59)} 17 * * *`, () => {
-  service.messageService(bot);
+  service.messageService([], msgs[1], bot);
 }, {
   scheduled: true,
   timezone: cron_setting.zone

@@ -1,7 +1,7 @@
 var crypto = require("crypto");
 
-const logger = (msg, time = `${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}`) => {
-  console.log(`[${time}] Message sent to --${msg}!--`);
+const logger = (channel, msg, time = `${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}`) => {
+  console.log(`[${time}] Message {${msg}} sent to {${channel}}`);
 }
 
 const pharsedMsg = (text) => {
