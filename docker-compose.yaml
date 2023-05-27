@@ -5,14 +5,14 @@ services:
     container_name: Discord-AlwaysOn
     build: ./always-on-service
     ports:
-      - "8184:8080"
+      - "4100:8080"
   cron-mess:
     container_name: Discord-CronMess
     build: ./cron-mess-service
     ports:
-      - "8183:8080"
+      - "4101:8080"
   music-bot:
     container_name: Discord-MusicBot
     build: ./music-bot-service
     ports:
-      - "8182:8080"
+      - "4102:8080"
