@@ -1,5 +1,40 @@
 {
-  "token": "",
-  "guild_id": "",
-  "channel_id": ""
+  "guild_id": "1085835098559098950",
+  "cron_setting": {
+    "hour": "09",
+    "minute": "30",
+    "zone": "Asia/Ho_Chi_Minh"
+  },
+  "channels": [
+    {
+      "id": "1085835098559098950",
+      "des": "MarineFord note - test channel"
+    },
+    {
+      "id": "1083571414059188318",
+      "des": "MarineFord note - zoro channel"
+    }
+  ],
+  "msgs": [
+    {
+      "id": "template0",
+      "des": "Test message",
+      "msg": "Discord api is working!"
+    },
+    {
+      "id": "template1",
+      "des": "Test message",
+      "msg": "Everyday message sent at ${TIME}, code today is ${RANDOM}"
+    },
+    {
+      "id": "template2",
+      "des": "Daily morning message",
+      "msg": "おはようございます。"
+    },
+    {
+      "id": "template3",
+      "des": "Endday message",
+      "msg": "お疲れ様です。"
+    }
+  ]
 }

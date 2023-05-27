@@ -1,26 +1,29 @@
-const cron = require('node-cron');
-// const Discord = require('discord.js');
-const { token, guild_id, channel_id } = require('./config.json');
+const lib = require('./util.js');
+const { channels, msgs } = require('./config.json');
 
-console.log("ok auto mess");
+const sendToChannels = (msg, bot, targetChannelIndexes) => {
+  if (!targetChannelIndexes || targetChannelIndexes.isEmpty()) {
+    channels.forEach((channel) => {
+      bot.createMessage(channel.id, lib.pharsedMsg(msg));
+      lib.logger(channel.des);
+    })
+  } else {
+    channels.forEach((channel, index) => {
+      if (indexs.includes(index)) {
+        bot.createMessage(channel.id, lib.pharsedMsg(msg));
+        lib.logger(channel.des);
+      }
+    })
+  }
+}
 
-// cron.schedule('0 1 * * *', () => {
-//   console.log('Runing a job at 01:00 at America/Sao_Paulo timezone');
-//   sendMessage();
-// }, {
-//   scheduled: true,
-//   timezone: "America/Sao_Paulo"
-// });
+const messageService = (bot) => {
+  try {
+    sendToChannels([2], msgs[1].msg, bot);
+  } catch (e) {
+    console.error("Send message failed: " + e);
+  }
+}
 
-// const client = new Discord.Client();
+module.exports = { messageService };
 
-// const sendMessage = () => {
-//   try {
-//     const guild = client.guilds.cache.get(guild_id);
-//     const channel = client.channels.cache.get(channel_id);
-
-//     channel.send('My Message');
-//   } catch (e) {
-//     console.error("Send message failed: " + e);
-//   }
-// }
