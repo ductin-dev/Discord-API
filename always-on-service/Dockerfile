@@ -17,4 +17,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "node index.js"]
+CMD ["node index.js"]
