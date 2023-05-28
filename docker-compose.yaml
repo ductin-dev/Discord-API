@@ -4,15 +4,24 @@ services:
   always-on:
     container_name: Discord-AlwaysOn
     build: ./always-on-service
+    logging:
+      options:
+        max-size: 10m
     ports:
       - "4100:8080"
   cron-mess:
     container_name: Discord-CronMess
     build: ./cron-mess-service
+    logging:
+      options:
+        max-size: 10m
     ports:
       - "4101:8080"
   music-bot:
     container_name: Discord-MusicBot
     build: ./music-bot-service
+    logging:
+      options:
+        max-size: 10m
     ports:
       - "4102:8080"
