@@ -7,21 +7,29 @@ services:
     logging:
       options:
         max-size: 10m
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    restart: unless-stopped
     ports:
-      - "4100:8080"
+      - "4100:4000"
   cron-mess:
     container_name: Discord-CronMess
     build: ./cron-mess-service
     logging:
       options:
         max-size: 10m
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    restart: unless-stopped
     ports:
-      - "4101:8080"
+      - "4101:4000"
   music-bot:
     container_name: Discord-MusicBot
     build: ./music-bot-service
     logging:
       options:
         max-size: 10m
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
     ports:
       - "4102:8080"
