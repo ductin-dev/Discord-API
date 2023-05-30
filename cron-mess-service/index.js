@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const Eris = require("eris");
 const cron = require('node-cron');
 
