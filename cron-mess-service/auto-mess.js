@@ -3,16 +3,14 @@ const { channels } = require('./config.json');
 
 const sendToChannels = (target_channels, msg, bot) => {
   if (target_channels.length == 0) {
-    channels.forEach((channel) => {
+    target_channels.forEach((channel) => {
       bot.createMessage(channel.id, lib.pharsedMsg(msg.msg));
       lib.logger(channel.des, msg.des);
     })
   } else {
-    channels.forEach((channel) => {
-      if (target_channels.map((target) => target.id).includes(channel.id)) {
-        bot.createMessage(channel.id, lib.pharsedMsg(msg.msg));
-        lib.logger(channel.des, msg.des);
-      }
+    target_channels.forEach((channel) => {
+      bot.createMessage(channel.id, lib.pharsedMsg(msg.msg));
+      lib.logger(channel.des, msg.des);
     })
   }
 }
