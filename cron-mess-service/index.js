@@ -34,18 +34,51 @@ bot.connect();
 //   timezone: cron_setting.zone
 // });
 
+// Cron for attendance
+var taskDay;
+var taskEnd;
 // Cron schedule everyday 7h31 - 7h52 AM
-cron.schedule(`${lib.randomBetween(31, 52)} 7 * * *`, () => {
-  service.messageService([channels[0]], msgs[2], bot);
+cron.schedule(`30 7 * * *`, () => {
+  taskDay = cron.schedule(`${lib.randomBetween(31, 52)} 7 * * *`, () => {
+    service.messageService([channels[0]], msgs[2], bot);
+  }, {
+    scheduled: true,
+    timezone: cron_setting.zone
+  });
+}, {
+  scheduled: true,
+  timezone: cron_setting.zone
+});
+cron.schedule(`0 8 * * *`, () => {
+  try {
+    taskDay.stop();
+  } catch (e) {
+    console.log("Task start is not created");
+  }
+}, {
+  scheduled: true,
+  timezone: cron_setting.zone
+});
+// Cron schedule everyday 17h21 - 17h59 PM
+cron.schedule(`20 17 * * *`, () => {
+  taskEnd = cron.schedule(`${lib.randomBetween(21, 59)} 17 * * *`, () => {
+    service.messageService([channels[0]], msgs[3], bot);
+  }, {
+    scheduled: true,
+    timezone: cron_setting.zone
+  });
+}, {
+  scheduled: true,
+  timezone: cron_setting.zone
+});
+cron.schedule(`0 18 * * *`, () => {
+  try {
+    taskEnd.stop();
+  } catch (e) {
+    console.log("Task end is not created");
+  }
 }, {
   scheduled: true,
   timezone: cron_setting.zone
 });
 
-// Cron schedule everyday 17h22 - 17h58 PM
-cron.schedule(`${lib.randomBetween(22, 58)} 17 * * *`, () => {
-  service.messageService([channels[0]], msgs[3], bot);
-}, {
-  scheduled: true,
-  timezone: cron_setting.zone
-});
